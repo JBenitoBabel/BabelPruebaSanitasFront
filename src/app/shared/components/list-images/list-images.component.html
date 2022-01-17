@@ -1,0 +1,30 @@
+<div class="ion-padding-top"
+>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar>
+  <ion-list lines="none">
+    <ion-item *ngFor="let image of imagesShown">
+      <ion-thumbnail slot="start">
+        <img [src]="image.photo" />
+      </ion-thumbnail>
+      <ion-label>{{image.text}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <p>
+    <ion-text *ngIf="!moreData">
+      No hay mas datos
+    </ion-text>
+  </p>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="nextPage($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</div>
