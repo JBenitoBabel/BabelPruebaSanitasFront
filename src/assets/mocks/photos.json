@@ -1,0 +1,28 @@
+[
+    {
+        "id": 500,
+        "photo": "url_photo",
+        "text": "random_lorem_ipsum_text"
+    },
+    {
+        "id": 200,
+        "photo": "url_photo",
+        "text": "random_lorem_ipsum_text"
+    },
+    {
+        "id": 34,
+        "photo": "url_photo",
+        "text": "random_lorem_ipsum_text"
+    },
+    {
+        "id": 987,
+        "photo": "url_photo",
+        "text": "random_lorem_ipsum_text"
+    },
+    {
+        "id": 45,
+        "photo": "url_photo",
+        "text": "random_lorem_ipsum_text"
+    }
+    
+]

@@ -9,6 +9,10 @@ log.txt
 .vscode/
 npm-debug.log*
 
+ios/
+android/
+.angular/
+
 node_modules/
 tmp/
 temp/
