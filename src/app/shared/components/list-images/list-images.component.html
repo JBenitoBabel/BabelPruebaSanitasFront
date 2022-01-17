@@ -2,11 +2,16 @@
 >
   <ion-toolbar>
     <ion-buttons slot="secondary">
-      <ion-button>
+      <ion-button (click)="refresh()">
         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar
+      placeholder="Buscar imagen"
+      (ionChange)="search($event)"
+      mode="md"
+      [value]='filter'>
+    </ion-searchbar>
   </ion-toolbar>
   <ion-list lines="none">
     <ion-item *ngFor="let image of imagesShown">
@@ -17,8 +22,8 @@
     </ion-item>
   </ion-list>
   <p>
-    <ion-text *ngIf="!moreData">
-      No hay mas datos
+    <ion-text *ngIf="!hasData">
+      No hay datos
     </ion-text>
   </p>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="nextPage($event)">

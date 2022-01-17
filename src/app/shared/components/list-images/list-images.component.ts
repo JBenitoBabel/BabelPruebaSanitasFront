@@ -9,26 +9,29 @@ export class ListImagesComponent implements OnInit {
 
   @Input() imagesList = [];
 
-  public allImages;
+  public selectedImages = [];
   public imagesShown = [];
   private page = 0;
 
-  public moreData = true;
+  public hasData = true;
+
+  private delayTimer;
+  public filter = '';
 
   constructor() { }
 
   ngOnInit() {
-    this.allImages = Object.assign({}, this.imagesList);
+    this.selectedImages = this.imagesList;
     this.showData();
   }
 
   showData() {
     let position = 20*this.page;
-    let moreData = this.imagesList.slice(position, position+20);
+    let moreData = this.selectedImages.slice(position, position+20);
     if (moreData.length != 0) {
       this.imagesShown = [...this.imagesShown, ...moreData];
-    } else {
-      this.moreData = false;
+    } else if (this.imagesShown.length == 0) {
+      this.hasData = false;
     }
   }
 
@@ -41,7 +44,42 @@ export class ListImagesComponent implements OnInit {
   }
 
   resetData() {
+    this.selectedImages = this.imagesList;
+    this.page = 0;
+    this.imagesShown = [];
+    this.filter = null;
+    this.hasData = true;
+  }
 
+  refresh() {
+    this.resetData();
+    this.showData();
+  }
+
+  search(e) {
+    const searchTerm = e.detail.value;
+    clearTimeout(this.delayTimer);
+    const self = this;
+    this.delayTimer = setTimeout(function() {
+      if (searchTerm.length >= 1) {
+        self.resetData();
+        self.searchFilter(searchTerm);
+      } else {
+        self.refresh();
+      }
+    }, 500);
+  }
+
+  searchFilter(searchTerm) {
+    this.filter = searchTerm;
+    this.selectedImages = [];
+    this.imagesList.forEach(element => {
+      if (element.id.includes(searchTerm) 
+      || element.text.toLowerCase().includes(searchTerm.toLowerCase())) {
+        this.selectedImages.push(element);
+      }
+    });
+    this.showData();
   }
 
 }
