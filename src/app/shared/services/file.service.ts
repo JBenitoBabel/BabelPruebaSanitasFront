@@ -6,11 +6,12 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 })
 export class FileService {
 
+  private filename: string;
+
   constructor() { }
 
   writeJsonData(data, nameFile) {
     data = JSON.stringify(data);
-    console.log('[writeJsonData] stringify', data);
     Filesystem.writeFile({
       path: `${nameFile}.json`,
       data: data,
@@ -36,18 +37,20 @@ export class FileService {
    }
   }
 
-  readJson(nameFile) {
-    async () => {
-      console.log('[readSecretJson] Directory', Directory.Data);
+  getJson(filename): any {
+    this.filename = filename;
+    let json = this.readJson();
+    return json;
+  }
+
+  readJson = async () => {
       const contents = await Filesystem.readFile({
-        path: `${nameFile}.json`,
+        path: `${this.filename}.json`,
         directory: Directory.Data,
         encoding: Encoding.UTF8,
       });
     
-      console.log('secrets:', contents);
-      console.log('parse:', JSON.parse(contents.data));
+      return JSON.parse(contents.data)
     }
-  }
-
+  
 }

@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <div>
+      <h3>Ionic - File</h3>
+      <ion-button (click)="getInitialJson()">
+        get data
+      </ion-button>
+
+    </div>
+
+
+    <ion-list>
+      <ion-item *ngFor="let image of imagesArray">
+        <ion-thumbnail slot="start">
+          <img [src]="image.photo" />
+        </ion-thumbnail>
+        <ion-label>{{image.text}}</ion-label>
+      </ion-item>
+    </ion-list>
+    
+  </div>
+</ion-content>

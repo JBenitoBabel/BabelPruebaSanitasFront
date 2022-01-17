@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FileService } from './shared/services/file.service';
 import { ImagesService } from './shared/services/images.service';
+import { LoadingService } from './shared/services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,14 @@ export class AppComponent {
 
   constructor(
     private imagesService: ImagesService,
-    private fileService: FileService
+    private fileService: FileService,
+    private loadingService: LoadingService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
+    this.loadingService.openLoader()
     this.getInitialData();
   }
 
@@ -49,7 +52,7 @@ export class AppComponent {
       const text = this.randomText();
       image = {
         id: `${id}-${element.id}`,
-        photo: element.url,
+        photo: element.download_url,
         text
       }
       this.imagesArray.push(image);
@@ -59,6 +62,7 @@ export class AppComponent {
   saveInitialData() {
     console.log('[saveInitialData] imagesArray', this.imagesArray);
     this.fileService.writeJsonData(this.imagesArray, 'initialData');
+    this.loadingService.dismissLoader();
   }
 
   randomText(): string {
