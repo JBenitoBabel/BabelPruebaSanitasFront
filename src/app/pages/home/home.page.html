@@ -6,18 +6,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <div class="container">
+    <div *ngIf="controlFile" class="ion-margin-top">
+      <ion-text>
+        El fichero aún no esta cargado.
+      </ion-text>
+      <ion-button (click)="getInitialJson()"
+        color="medium" expand="block" fill="outline"
+        class="ion-margin-top">
+        Refrescar
+      </ion-button>
+    </div>
 
-    <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">Blank</ion-title>
-      </ion-toolbar>
-    </ion-header>
-  
-      <app-list-images *ngIf="imagesArray"
-        [imagesList] = "imagesArray">
-      </app-list-images>
+    <app-list-images *ngIf="imagesArray && !controlFile"
+      [imagesList] = "imagesArray">
+    </app-list-images>
+
   </div>
-
 </ion-content>

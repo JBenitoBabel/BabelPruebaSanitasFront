@@ -26,8 +26,8 @@ export class ListImagesComponent implements OnInit {
   }
 
   showData() {
-    let position = 20*this.page;
-    let moreData = this.selectedImages.slice(position, position+20);
+    let position = 10*this.page;
+    let moreData = this.selectedImages.slice(position, position+10);
     if (moreData.length != 0) {
       this.imagesShown = [...this.imagesShown, ...moreData];
     } else if (this.imagesShown.length == 0) {

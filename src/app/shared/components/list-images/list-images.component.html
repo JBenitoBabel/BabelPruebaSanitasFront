@@ -1,6 +1,6 @@
-<div class="ion-padding-top"
->
-  <ion-toolbar>
+<ion-grid class="ion-no-padding">
+
+  <ion-toolbar class="ion-padding-top ion-padding-bottom fixed" mode="md">
     <ion-buttons slot="secondary">
       <ion-button (click)="refresh()">
         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
@@ -13,7 +13,8 @@
       [value]='filter'>
     </ion-searchbar>
   </ion-toolbar>
-  <ion-list lines="none">
+
+  <ion-list lines="none" class="pt-100" >
     <ion-item *ngFor="let image of imagesShown">
       <ion-thumbnail slot="start">
         <img [src]="image.photo" />
@@ -21,15 +22,17 @@
       <ion-label>{{image.text}}</ion-label>
     </ion-item>
   </ion-list>
-  <p>
+  <ion-item lines="none">
     <ion-text *ngIf="!hasData">
       No hay datos
     </ion-text>
-  </p>
+  </ion-item>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="nextPage($event)">
     <ion-infinite-scroll-content
       loadingSpinner="crescent">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+</ion-grid>
 
-</div>
+
+

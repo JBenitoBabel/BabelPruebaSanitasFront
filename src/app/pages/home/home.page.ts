@@ -11,6 +11,8 @@ export class HomePage implements OnInit {
   private delayTimer;
   public imagesArray;
 
+  public controlFile = false;
+
   constructor(
     private fileService: FileService
   ) {}
@@ -20,20 +22,21 @@ export class HomePage implements OnInit {
     clearTimeout(this.delayTimer);
     const self = this;
     this.delayTimer = setTimeout(function() {
-      const data = self.getInitialJson();
-      console.log('[HomePage][setTimeout]', data);
-    }, 1000);
+      self.getInitialJson();
+    }, 5000);
   }
-  
+
   getInitialJson() {
-    console.log('[HomePage][readInitialJson]');
     this.getDataFile('initialData');
   }
 
-  getDataFile(fileName){
+  getDataFile(fileName) {
     this.fileService.getJson(fileName).then(result => {
-      console.log('[getDataFile]', result);
       this.imagesArray = result;
+      this.controlFile = false;
+    }).catch((e) => {
+      console.error('[HomePage][getDataFile] error', e);
+      this.controlFile = true;
     });
   }
 
